@@ -1,0 +1,20 @@
+@media (max-width: 1120px) {
+  .app-shell { padding: 0 26px; }
+  .calculator-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card-margin { grid-column: 1 / -1; }
+}
+@media (max-width: 720px) {
+  .app-shell { padding: 0 16px; }
+  .topbar { min-height: 70px; }
+  .hero { padding: 38px 0 29px; display: block; }
+  .hero-meta { margin-top: 18px; }
+  .calculator-grid, .management-grid { grid-template-columns: 1fr; }
+  .card-margin { grid-column: auto; }
+  .section-heading { align-items: start; gap: 10px; }
+  .section-note { text-align: right; max-width: 120px; }
+  .calculator-card { padding: 18px; }
+  .footer { flex-direction: column; gap: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

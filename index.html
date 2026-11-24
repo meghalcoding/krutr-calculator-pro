@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>KRUTr Calculator Pro</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/calculator.css">
+  <link rel="stylesheet" href="css/presets.css">
+  <link rel="stylesheet" href="css/history.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/calculations/pricing-engine.js" defer></script>
+  <script src="js/storage.js" defer></script>\n  <script src="js/ui.js" defer></script>\n  <script src="js/stage4.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="KRUTr Calculator Pro home">
+        <span class="brand-mark">K</span>
+        <span class="brand-copy"><strong>KRUTr</strong><small>CALCULATOR PRO</small></span>
+      </a>
+      <div class="topbar-actions">
+        <span class="currency-chip"><span class="status-dot"></span> USD</span>
+        <button class="icon-button" id="themeToggle" type="button" aria-label="Switch theme" title="Switch theme">
+          <span id="themeIcon" aria-hidden="true">☼</span>
+        </button>
+        <button class="icon-button" type="button" aria-label="Settings are coming in a later stage" title="Settings (coming soon)" disabled>⚙</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">STAFFING PRICING INTELLIGENCE</p>
+          <h1>Calculate with <span>confidence.</span></h1>
+          <p class="hero-subtitle">A clearer way to price talent, protect margins and understand every dollar.</p>
+        </div>
+        <div class="hero-meta"><span class="live-indicator"></span> Workspace ready</div>
+      </section>
+
+      <section class="workspace-section" aria-labelledby="calculatorsTitle">
+        <div class="section-heading">
+          <div><p class="eyebrow">PRICING WORKSPACE</p><h2 id="calculatorsTitle">Your calculators</h2></div>
+          <span class="section-note">Three independent workspaces</span>
+        </div>
+
+        <div class="calculator-grid">
+
+          <article class="calculator-card card-pay" data-calculator="pay">
+            <div class="card-heading">
+              <div class="card-icon purple">01</div>
+              <div><p class="card-kicker">CALCULATOR 01</p><h3>Maximum Pay Rate</h3></div>
+            </div>
+            <p class="card-description">Find the highest candidate pay rate your pricing can support.</p>
+            <div class="calculator-fields">
+              
+          <div class="field-group">
+            <label for="maxBill">Maximum gross bill rate <span class="required" aria-label="required">*</span></label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input id="maxBill" data-field="maxBill" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" autocomplete="off"></div>
+          </div>
+          <div class="field-group">
+            <label for="payDiscount">Client discount</label>
+            <div class="input-wrap"><input id="payDiscount" data-field="payDiscount" type="number" min="0" max="100" step="0.01" value="0" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+          <div class="field-group">
+            <label for="payVms">MSP / VMS fee</label>
+            <div class="input-wrap"><input id="payVms" data-field="payVms" type="number" min="0" max="100" step="0.01" value="0" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+          <div class="field-group">
+            <label for="payOverhead">Pay load / overhead</label>
+            <div class="input-wrap"><input id="payOverhead" data-field="payOverhead" type="number" min="0" step="0.01" value="25" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+              
+          <div class="field-group strategy-group">
+            <label>Pricing strategy</label>
+            <div class="strategy-switch" role="group" aria-label="Pricing strategy">
+              <button class="strategy-option active" type="button" data-strategy="markup" aria-pressed="true">Markup</button>
+              <button class="strategy-option" type="button" data-strategy="desiredProfit" aria-pressed="false">Desired profit</button>
+            </div>
+          </div>
+          <div class="field-group strategy-input" data-strategy-input="markup">
+            <label for="payMarkup">Markup</label>
+            <div class="input-wrap"><input id="payMarkup" data-field="markupPct" type="number" min="0" step="0.01" value="20" inputmode="decimal"><span class="input-suffix">%</span></div>
+          </div>
+          <div class="field-group strategy-input" data-strategy-input="desiredProfit" hidden>
+            <label for="payDesiredProfit">Desired gross profit per hour</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input id="payDesiredProfit" data-field="desiredProfit" type="number" min="0" max="500" step="0.01" value="25" inputmode="decimal"><span class="input-suffix">USD</span></div>
+            <input class="profit-slider" data-field="desiredProfitSlider" type="range" min="0" max="500" step="1" value="25" aria-label="Desired gross profit slider">
+            <div class="range-labels"><span>$0</span><span>$500</span></div>
+          </div>
+            </div>
+            <div class="card-actions">
+              <button class="button button-primary" type="button" data-action="calculate">Calculate</button>
+              <button class="button button-quiet" type="button" data-action="reset">Reset</button>
+            </div>
+            <div class="calculator-error" role="alert" aria-live="polite" hidden></div>
+            <section class="result-panel" aria-live="polite" aria-label="Maximum Pay Rate results">
+              <div class="result-topline"><span class="result-label">MAXIMUM CANDIDATE PAY</span><span class="profitability-pill" data-result="status">Awaiting inputs</span></div>
+              <strong class="result-primary" data-result="primary">—</strong>
+              <small class="result-caption" data-result="caption">Enter your pricing details to preview results.</small>
+              <div class="result-metrics">
+                <div><span>Net revenue</span><strong data-result="netRevenue">—</strong></div>
+                <div><span>Gross profit</span><strong data-result="grossProfit">—</strong></div>
+                <div><span>Net margin</span><strong data-result="margin">—</strong></div>
+                <div><span>Markup</span><strong data-result="markup">—</strong></div>
+              </div>
+              <details class="result-breakdown">
+                <summary>View calculation breakdown</summary>
+                <dl data-result="breakdown"></dl>
+              </details>
+              <div class="result-actions"><button class="button button-quiet" type="button" data-action="copy" disabled>Copy results</button><span class="result-state" data-result="state">Live preview</span></div>
+            </section>
+          </article>
+
+          <article class="calculator-card card-bill" data-calculator="bill">
+            <div class="card-heading">
+              <div class="card-icon cyan">02</div>
+              <div><p class="card-kicker">CALCULATOR 02</p><h3>Bill Rate</h3></div>
+            </div>
+            <p class="card-description">Determine the gross client rate required to achieve your target.</p>
+            <div class="calculator-fields">
+              
+          <div class="field-group">
+            <label for="candidatePay">Candidate pay rate <span class="required" aria-label="required">*</span></label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input id="candidatePay" data-field="candidatePay" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" autocomplete="off"></div>
+          </div>
+          <div class="field-group">
+            <label for="billDiscount">Client discount</label>
+            <div class="input-wrap"><input id="billDiscount" data-field="billDiscount" type="number" min="0" max="100" step="0.01" value="0" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+          <div class="field-group">
+            <label for="billVms">MSP / VMS fee</label>
+            <div class="input-wrap"><input id="billVms" data-field="billVms" type="number" min="0" max="100" step="0.01" value="0" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+          <div class="field-group">
+            <label for="billOverhead">Pay load / overhead</label>
+            <div class="input-wrap"><input id="billOverhead" data-field="billOverhead" type="number" min="0" step="0.01" value="25" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+              
+          <div class="field-group strategy-group">
+            <label>Pricing strategy</label>
+            <div class="strategy-switch" role="group" aria-label="Pricing strategy">
+              <button class="strategy-option active" type="button" data-strategy="markup" aria-pressed="true">Markup</button>
+              <button class="strategy-option" type="button" data-strategy="desiredProfit" aria-pressed="false">Desired profit</button>
+            </div>
+          </div>
+          <div class="field-group strategy-input" data-strategy-input="markup">
+            <label for="billMarkup">Markup</label>
+            <div class="input-wrap"><input id="billMarkup" data-field="markupPct" type="number" min="0" step="0.01" value="20" inputmode="decimal"><span class="input-suffix">%</span></div>
+          </div>
+          <div class="field-group strategy-input" data-strategy-input="desiredProfit" hidden>
+            <label for="billDesiredProfit">Desired gross profit per hour</label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input id="billDesiredProfit" data-field="desiredProfit" type="number" min="0" max="500" step="0.01" value="25" inputmode="decimal"><span class="input-suffix">USD</span></div>
+            <input class="profit-slider" data-field="desiredProfitSlider" type="range" min="0" max="500" step="1" value="25" aria-label="Desired gross profit slider">
+            <div class="range-labels"><span>$0</span><span>$500</span></div>
+          </div>
+            </div>
+            <div class="card-actions">
+              <button class="button button-primary" type="button" data-action="calculate">Calculate</button>
+              <button class="button button-quiet" type="button" data-action="reset">Reset</button>
+            </div>
+            <div class="calculator-error" role="alert" aria-live="polite" hidden></div>
+            <section class="result-panel" aria-live="polite" aria-label="Bill Rate results">
+              <div class="result-topline"><span class="result-label">REQUIRED GROSS BILL RATE</span><span class="profitability-pill" data-result="status">Awaiting inputs</span></div>
+              <strong class="result-primary" data-result="primary">—</strong>
+              <small class="result-caption" data-result="caption">Enter your pricing details to preview results.</small>
+              <div class="result-metrics">
+                <div><span>Net revenue</span><strong data-result="netRevenue">—</strong></div>
+                <div><span>Gross profit</span><strong data-result="grossProfit">—</strong></div>
+                <div><span>Net margin</span><strong data-result="margin">—</strong></div>
+                <div><span>Markup</span><strong data-result="markup">—</strong></div>
+              </div>
+              <details class="result-breakdown">
+                <summary>View calculation breakdown</summary>
+                <dl data-result="breakdown"></dl>
+              </details>
+              <div class="result-actions"><button class="button button-quiet" type="button" data-action="copy" disabled>Copy results</button><span class="result-state" data-result="state">Live preview</span></div>
+            </section>
+          </article>
+
+          <article class="calculator-card card-margin" data-calculator="margin">
+            <div class="card-heading">
+              <div class="card-icon green">03</div>
+              <div><p class="card-kicker">CALCULATOR 03</p><h3>Margin Analysis</h3></div>
+            </div>
+            <p class="card-description">See the real profitability after discounts, fees and loaded cost.</p>
+            <div class="calculator-fields">
+              
+          <div class="field-group">
+            <label for="marginPay">Candidate pay rate <span class="required" aria-label="required">*</span></label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input id="marginPay" data-field="marginPay" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" autocomplete="off"></div>
+          </div>
+          <div class="field-group">
+            <label for="marginBill">Gross client bill rate <span class="required" aria-label="required">*</span></label>
+            <div class="input-wrap"><span class="input-prefix">$</span><input id="marginBill" data-field="marginBill" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal" autocomplete="off"></div>
+          </div>
+          <div class="field-group">
+            <label for="marginDiscount">Client discount</label>
+            <div class="input-wrap"><input id="marginDiscount" data-field="marginDiscount" type="number" min="0" max="100" step="0.01" value="0" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+          <div class="field-group">
+            <label for="marginVms">MSP / VMS fee</label>
+            <div class="input-wrap"><input id="marginVms" data-field="marginVms" type="number" min="0" max="100" step="0.01" value="0" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+          <div class="field-group">
+            <label for="marginOverhead">Pay load / overhead</label>
+            <div class="input-wrap"><input id="marginOverhead" data-field="marginOverhead" type="number" min="0" step="0.01" value="25" inputmode="decimal" autocomplete="off"><span class="input-suffix">%</span></div>
+          </div>
+              
+            </div>
+            <div class="card-actions">
+              <button class="button button-primary" type="button" data-action="calculate">Calculate</button>
+              <button class="button button-quiet" type="button" data-action="reset">Reset</button>
+            </div>
+            <div class="calculator-error" role="alert" aria-live="polite" hidden></div>
+            <section class="result-panel" aria-live="polite" aria-label="Margin Analysis results">
+              <div class="result-topline"><span class="result-label">NET REVENUE MARGIN</span><span class="profitability-pill" data-result="status">Awaiting inputs</span></div>
+              <strong class="result-primary" data-result="primary">—</strong>
+              <small class="result-caption" data-result="caption">Enter your pricing details to preview results.</small>
+              <div class="result-metrics">
+                <div><span>Net revenue</span><strong data-result="netRevenue">—</strong></div>
+                <div><span>Gross profit</span><strong data-result="grossProfit">—</strong></div>
+                <div><span>Net margin</span><strong data-result="margin">—</strong></div>
+                <div><span>Markup</span><strong data-result="markup">—</strong></div>
+              </div>
+              <details class="result-breakdown">
+                <summary>View calculation breakdown</summary>
+                <dl data-result="breakdown"></dl>
+              </details>
+              <div class="result-actions"><button class="button button-quiet" type="button" data-action="copy" disabled>Copy results</button><span class="result-state" data-result="state">Live preview</span></div>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="management-grid" aria-label="Saved presets and calculation history">
+        <article class="panel presets-panel">
+          <div class="panel-heading"><div><p class="eyebrow">REUSABLE CONFIGURATIONS</p><h2>Client presets</h2></div><span class="panel-icon">▤</span></div>
+          <p class="panel-description">Save and reuse client discount, MSP/VMS fee, overhead and pricing strategy settings.</p>
+          <div id="presetList" class="record-list" aria-live="polite"><div class="empty-state"><strong>No presets yet</strong><small>Create a preset to reuse client pricing settings.</small></div></div>
+          <div class="panel-actions">
+            <button class="button button-secondary" id="createPreset" type="button">Create preset</button>
+            <button class="button button-quiet" id="importPresets" type="button">Import JSON</button>
+            <button class="button button-quiet" id="exportPresets" type="button">Export JSON</button>
+            <input id="presetFile" type="file" accept="application/json,.json" hidden>
+          </div>
+        </article>
+        <article class="panel history-panel">
+          <div class="panel-heading"><div><p class="eyebrow">YOUR WORKSPACE ACTIVITY</p><h2>Recent calculations</h2></div><span class="panel-icon">◷</span></div>
+          <p class="panel-description">Calculate to save a permanent snapshot. Reopen, copy or remove previous calculations.</p>
+          <div id="historyList" class="record-list" aria-live="polite"><div class="empty-state"><strong>No calculations saved</strong><small>Completed calculations will appear here.</small></div></div>
+          <div class="panel-actions">
+            <button class="button button-secondary" id="viewHistory" type="button">Show all</button>
+            <button class="button button-quiet" id="exportHistory" type="button">Export CSV</button>
+            <button class="button button-quiet" id="clearHistory" type="button">Clear history</button>
+          </div>
+        </article>
+      </section>
+
+      <dialog id="presetDialog" class="app-dialog" aria-labelledby="presetDialogTitle">
+        <form id="presetForm" method="dialog">
+          <div class="dialog-heading"><div><p class="eyebrow">CLIENT CONFIGURATION</p><h2 id="presetDialogTitle">Create preset</h2></div><button class="icon-button" type="button" id="closePresetDialog" aria-label="Close">×</button></div>
+          <label for="presetName">Preset name</label><input id="presetName" name="name" type="text" maxlength="80" required placeholder="e.g. Acme Corp">
+          <div class="dialog-grid">
+            <div><label for="presetDiscount">Client discount (%)</label><input id="presetDiscount" name="discount" type="number" min="0" max="100" step="0.01" value="0" required></div>
+            <div><label for="presetVms">MSP/VMS fee (%)</label><input id="presetVms" name="vms" type="number" min="0" max="100" step="0.01" value="0" required></div>
+            <div><label for="presetOverhead">Overhead (%)</label><input id="presetOverhead" name="overhead" type="number" min="0" step="0.01" value="25" required></div>
+            <div><label for="presetStrategy">Pricing strategy</label><select id="presetStrategy" name="strategy"><option value="markup">Markup</option><option value="desiredProfit">Desired profit</option></select></div>
+            <div><label for="presetMarkup">Markup (%)</label><input id="presetMarkup" name="markup" type="number" min="0" step="0.01" value="20"></div>
+            <div><label for="presetProfit">Desired profit ($/hr)</label><input id="presetProfit" name="profit" type="number" min="0" max="500" step="0.01" value="25"></div>
+          </div>
+          <p id="presetFormError" class="dialog-error" role="alert" hidden></p>
+          <div class="dialog-actions"><button class="button button-quiet" type="button" id="cancelPreset">Cancel</button><button class="button button-primary" type="submit">Save preset</button></div>
+        </form>
+      </dialog>
+      <div id="appNotice" class="app-notice" role="status" aria-live="polite"></div>
+    </main>
+
+    <footer class="footer"><span>© KRUTr Calculator Pro</span><span>Pricing clarity for staffing professionals.</span><span class="footer-credit">Built by <strong>Jahaan</strong></span><span>Version 2.3 · Presets &amp; history</span></footer>
+  </div>
+</body>
+</html>
